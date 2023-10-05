@@ -12,23 +12,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
     private GameManager gameManagerScript;
+    public int playerAmmo;
+    private bool hasAmmo;
 
     private void Awake()
     {
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerAmmo = 10;
     }
 
     private void Update()
     {
+        
         if (gameManagerScript.GetGameStatus()==true)
         {
             HorizontalMovement();
             VerticalRotation();
-            Shoot();
+            HasAmmo();
+            gameManagerScript.UpdatePlayerAmmo();
         }
-
-
-
     }
 
     private void VerticalRotation()
@@ -36,7 +38,6 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         transform.Rotate(0, 0, verticalInput);
     }
-
     private void HorizontalMovement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -44,19 +45,34 @@ public class PlayerController : MonoBehaviour
         ScreenLimiter();
     }
 
+    public bool HasAmmo()
+    {
+        if (playerAmmo > 0)
+        {
+            Shoot();GetAmmo();
+            return hasAmmo;
+        }
+        else
+        {
+            gameManagerScript.GameOver();
+            return hasAmmo;
+        }
+    }
     
 
     private void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
             Instantiate(bulletPrefab,bulletPoint.transform.position,bulletPoint.transform.rotation);
-        }
-        
+            playerAmmo = playerAmmo - 1;
+            SetAmmo(playerAmmo);
+        }  
     }
 
-
-
+    public void SetAmmo(int ammo){playerAmmo = ammo;}
+    public int GetAmmo(){return playerAmmo;}
 
 
 

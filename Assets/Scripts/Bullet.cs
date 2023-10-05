@@ -8,12 +8,14 @@ public class Bullet : MonoBehaviour
     private GameManager gameManagerScript;
     private float outOfLimit = -1f;
     private ParticleSystem explosion;
+    private PlayerController playerScript;
     
 
     private void Awake()
     {
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         
     }
 
@@ -42,7 +44,8 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Target"))
         {
-            gameManagerScript.UpdateCount();
+            playerScript.SetAmmo(playerScript.GetAmmo()+1);
+            gameManagerScript.UpdateScore();
             explosion.gameObject.transform.position = transform.position;
             explosion.Play();
             Destroy(other.gameObject);
