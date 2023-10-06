@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float rightLimit = 1.6f;
     private float leftLimit = -1.6f;
     private float speedMovement = 5f;
+    private float gunRecoil = 0.2f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
     private GameManager gameManagerScript;
@@ -64,17 +65,22 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             Instantiate(bulletPrefab,bulletPoint.transform.position,bulletPoint.transform.rotation);
             playerAmmo = playerAmmo - 1;
             SetAmmo(playerAmmo);
+            StartCoroutine(ShootAnim());
         }  
     }
 
     public void SetAmmo(int ammo){playerAmmo = ammo;}
     public int GetAmmo(){return playerAmmo;}
 
-
+    IEnumerator ShootAnim()
+    {
+        transform.position = new Vector3(transform.position.x + gunRecoil, transform.position.y, transform.position.z);
+        yield return new WaitForSeconds(0.1f);
+        transform.position = new Vector3(transform.position.x - gunRecoil, transform.position.y, transform.position.z);
+    }
 
     private void ScreenLimiter()
     {

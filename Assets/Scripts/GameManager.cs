@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Scene");
+        SceneManager.LoadScene(0);
         restart.gameObject.SetActive(true);
     }
 
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateScore()
     {
-        score++;
+        score = score + 33;
         scoreText.SetText("Score : " + score);
     }
 
