@@ -15,20 +15,23 @@ public class GameManager : MonoBehaviour
     private Vector3 blankRandomPos;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI playerAmmoText;
+    [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private Button startButton;
     [SerializeField] private Button restart;
     [SerializeField] private GameObject gameOverText;
     [SerializeField] private GameObject scoreTextCanvas;
     [SerializeField] private GameObject ammoTextCanvas;
+    [SerializeField] private GameObject playerNameTextCanvas;
     [SerializeField] private PlayerController playerScript;
     private int score = 0;
-    public static GameManager Instance;
+    //public static GameManager Instance;
+    
 
     private void Awake()
     {
         scoreTextCanvas.gameObject.SetActive(false);
         ammoTextCanvas.gameObject.SetActive(false);
-
+        playerNameTextCanvas.gameObject.SetActive(false);
     }
 
     public void StartGame()
@@ -38,7 +41,13 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         scoreTextCanvas.gameObject.SetActive(true);
         ammoTextCanvas.gameObject.SetActive(true);
+        playerNameTextCanvas.gameObject.SetActive(true);
         StartCoroutine(BlankPointsSpawner());
+    }
+
+    private void Update()
+    {
+        UpdatePlayerName();
     }
 
     public void GameOver()
@@ -72,6 +81,11 @@ public class GameManager : MonoBehaviour
         playerAmmoText.SetText("Ammo : " + playerScript.GetAmmo());
     }
 
+    public void UpdatePlayerName()
+    {
+        playerNameText.SetText("Player : " + MainManager.Instance.GetPlayerName());
+    }
+
     public bool GetGameStatus(){return isGameActive;}
 
     IEnumerator BlankPointsSpawner()
@@ -84,8 +98,5 @@ public class GameManager : MonoBehaviour
 
     }
         
-        
-
-
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,6 +13,11 @@ public class MenuUiHandler : MonoBehaviour
 {
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button exitGameButton;
+    [SerializeField] private Text inputText;
+    [SerializeField] private Text loadedText;
+    private string playerName;
+    private string saveName;
+    public MainManager Instance;
     
 
     public void StartGame()
@@ -25,6 +30,23 @@ public class MenuUiHandler : MonoBehaviour
         EditorApplication.ExitPlaymode();
         Application.Quit();
     }
+
+    private void Update()
+    {
+        playerName = PlayerPrefs.GetString("name", "none");
+        loadedText.text = playerName;
+    }
+
+    public void SetPlayerName()
+    {
+        saveName = inputText.text;
+        PlayerPrefs.SetString("name", saveName);
+        MainManager.Instance.SetPlayerName(saveName);
+    }
+
+
+
+
 
 
 

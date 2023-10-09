@@ -6,17 +6,29 @@ using UnityEngine.SceneManagement;
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
+    public string playerName;
 
     private void Awake()
     {
-        if(Instance != null)
-        {
-            DontDestroyOnLoad(this);
+       if(Instance != null)
+       {
+            Destroy(gameObject);
             return;
-        }
+       }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); 
+    }
+
+    public void SetPlayerName(string pName)
+    {
+        playerName = pName;
+    }
+
+    public string GetPlayerName()
+    {
+        if(playerName == null){Debug.Log("No name stored");}
+        return playerName;
     }
 
     
