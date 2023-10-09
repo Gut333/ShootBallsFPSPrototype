@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI playerAmmoText;
     [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private Button startButton;
     [SerializeField] private Button restart;
     [SerializeField] private GameObject gameOverText;
@@ -24,14 +25,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playerNameTextCanvas;
     [SerializeField] private PlayerController playerScript;
     private int score = 0;
+    private int bestScore;
+    private string bestScorePlayerName;
     //public static GameManager Instance;
     
-
     private void Awake()
     {
         scoreTextCanvas.gameObject.SetActive(false);
         ammoTextCanvas.gameObject.SetActive(false);
         playerNameTextCanvas.gameObject.SetActive(false);
+        bestScore = MainManager.Instance.GetBestScore();
+        bestScorePlayerName = MainManager.Instance.GetBestScorePlayerName();
     }
 
     public void StartGame()
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         UpdatePlayerName();
+        BestScoreUpdate();
     }
 
     public void GameOver()
@@ -74,7 +79,27 @@ public class GameManager : MonoBehaviour
     {
         score = score + 33;
         scoreText.SetText("Score : " + score);
+        BestScoreSaver();
+        
     }
+
+    public void BestScoreSaver()
+    {
+        if (score > bestScore)
+        {
+            bestScore = score;
+            MainManager.Instance.SetBestScore(bestScore);
+            bestScorePlayerName = MainManager.Instance.GetPlayerName();
+            MainManager.Instance.SetBestScorePlayerName(bestScorePlayerName);
+        }
+    }
+
+    public void BestScoreUpdate()
+    {
+        bestScoreText.SetText("best score : " + bestScore + " - " + bestScorePlayerName);
+    }
+
+    public int GetBestScore() { return bestScore; }
 
     public void UpdatePlayerAmmo()
     {

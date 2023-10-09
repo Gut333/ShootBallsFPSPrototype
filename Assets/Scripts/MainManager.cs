@@ -7,7 +7,9 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
     public string playerName;
-
+    private int bestScore;
+    private string bestScorePlayerName;
+        
     private void Awake()
     {
        if(Instance != null)
@@ -27,11 +29,22 @@ public class MainManager : MonoBehaviour
 
     public string GetPlayerName()
     {
-        if(playerName == null){Debug.Log("No name stored");}
+        if(playerName == null){Debug.Log("No name stored.");}
         return playerName;
     }
 
+    public void SetBestScore(int bestScore)
+    {
+        this.bestScore = bestScore;
+    }
+
+    public int GetBestScore() { return bestScore; }
     
-    
+    public string GetBestScorePlayerName() { return bestScorePlayerName; }
+
+    public void SetBestScorePlayerName(string bestScorePlayerName)
+    {
+        this.bestScorePlayerName = bestScorePlayerName;
+    }
 
 }

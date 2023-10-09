@@ -454,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &253008362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -962,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1268297141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1516,9 +1516,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 655617086}
-        m_TargetAssemblyTypeName: PlayerName, Assembly-CSharp
-        m_MethodName: SetName
+      - m_Target: {fileID: 1147601636}
+        m_TargetAssemblyTypeName: MenuUiHandler, Assembly-CSharp
+        m_MethodName: SetPlayerName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
