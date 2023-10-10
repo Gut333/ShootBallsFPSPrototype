@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     private GameManager gameManagerScript;
     private float outOfLimit = -1f;
     private ParticleSystem explosion;
+    private ParticleSystem targetExplosion;
     private PlayerController playerScript;
     
 
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
     {
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
+        targetExplosion = GameObject.Find("Target Explosion").GetComponent<ParticleSystem>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         
     }
@@ -29,9 +31,10 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            Destroy(gameObject);
             explosion.gameObject.transform.position = transform.position;
             explosion.Play();
+            Destroy(gameObject);
+
         }
 
         if (other.gameObject.CompareTag("Ground"))
@@ -47,6 +50,8 @@ public class Bullet : MonoBehaviour
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
             gameManagerScript.UpdateScore();
             explosion.gameObject.transform.position = transform.position;
+            targetExplosion.gameObject.transform.position = transform.position;
+            targetExplosion.Play();
             explosion.Play();
             Destroy(other.gameObject);
             Destroy(gameObject);
