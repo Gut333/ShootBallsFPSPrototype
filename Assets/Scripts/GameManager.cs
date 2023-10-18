@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     private void BlankPointsGenerator()
     {
         randomZ = Random.Range(-2,2);
-        randomY = Random.Range(2,11);
+        randomY = Random.Range(2,8);
         blankRandomPos = new Vector3(transform.position.x, randomY, randomZ);
         Instantiate(blankPoints[0],blankRandomPos,blankPoints[0].transform.rotation);
     }

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float rightLimit = 1.6f;
     private float leftLimit = -1.6f;
     private float speedMovement = 5f;
-    private float gunRecoil = 0.2f;
+    private float gunRecoil = 2.0f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
     private GameManager gameManagerScript;
