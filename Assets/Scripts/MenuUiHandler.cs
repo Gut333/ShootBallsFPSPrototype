@@ -17,7 +17,7 @@ public class MenuUiHandler : MonoBehaviour
     [SerializeField] private Text loadedText;
     private string playerName;
     private string saveName;
-    public MainManager Instance;
+    public GameManager gameManagerInstance;
     
 
     public void StartGame()
@@ -41,7 +41,7 @@ public class MenuUiHandler : MonoBehaviour
     {
         saveName = inputText.text;
         PlayerPrefs.SetString("name", saveName);
-        MainManager.Instance.SetPlayerName(saveName);
+        GameManager.gameManagerInstance.SetBestScorePlayerName(saveName);
     }
 
 

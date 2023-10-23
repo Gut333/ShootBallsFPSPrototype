@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 40f;
-    private GameManager gameManagerScript;
     private float outOfLimit = -1f;
     private ParticleSystem explosion;
     private ParticleSystem targetExplosion;
@@ -14,7 +13,6 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
         targetExplosion = GameObject.Find("Target Explosion").GetComponent<ParticleSystem>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -48,7 +46,9 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Target"))
         {
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
-            gameManagerScript.UpdateScore();
+
+            GameManager.gameManagerInstance.UpdateScore();
+
             explosion.gameObject.transform.position = transform.position;
             targetExplosion.gameObject.transform.position = transform.position;
             targetExplosion.Play();

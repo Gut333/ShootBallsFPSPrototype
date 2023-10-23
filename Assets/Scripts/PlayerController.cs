@@ -12,25 +12,22 @@ public class PlayerController : MonoBehaviour
     private float gunRecoil = 2.0f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
-    private GameManager gameManagerScript;
     public int playerAmmo;
     private bool hasAmmo;
 
     private void Awake()
     {
-        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerAmmo = 10;
     }
 
     private void Update()
     {
-        
-        if (gameManagerScript.GetGameStatus()==true)
+        if (GameManager.gameManagerInstance.GetGameStatus() == true)
         {
             HorizontalMovement();
             VerticalRotation();
             HasAmmo();
-            gameManagerScript.UpdatePlayerAmmo();
+            GameManager.gameManagerInstance.UpdatePlayerAmmo();
         }
     }
 
@@ -55,7 +52,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            gameManagerScript.GameOver();
+            GameManager.gameManagerInstance.GameOver();
             return hasAmmo;
         }
     }

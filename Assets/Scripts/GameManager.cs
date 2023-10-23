@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager gameManagerInstance;
     public List<GameObject> blankPoints;
     public bool isGameActive = false;
     private float randomZ;
@@ -27,26 +28,49 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int bestScore;
     private string bestScorePlayerName;
-    //public static GameManager Instance;
-    
+    public string playerName;
+
+
     private void Awake()
     {
-        scoreTextCanvas.gameObject.SetActive(false);
-        ammoTextCanvas.gameObject.SetActive(false);
-        playerNameTextCanvas.gameObject.SetActive(false);
-        bestScore = MainManager.Instance.GetBestScore();
-        bestScorePlayerName = MainManager.Instance.GetBestScorePlayerName();
+        GameManagerInstance();
+        ShowCanvas(false);
+        bestScore = GameManager.gameManagerInstance.GetBestScore();
+        bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
+
+    }
+
+
+    private void GameManagerInstance()
+    {
+        if (gameManagerInstance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        gameManagerInstance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void StartGame()
     {
-        startButton.gameObject.SetActive(false);
-        restart.gameObject.SetActive(false);
-        isGameActive = true;
-        scoreTextCanvas.gameObject.SetActive(true);
-        ammoTextCanvas.gameObject.SetActive(true);
-        playerNameTextCanvas.gameObject.SetActive(true);
+        ShowCanvas(true);
+        ShowButtons(false);
+        isGameActive = true;   
         StartCoroutine(BlankPointsSpawner());
+    }
+
+   private void ShowCanvas(bool isVisible)
+    {
+        scoreTextCanvas.gameObject.SetActive(isVisible);
+        ammoTextCanvas.gameObject.SetActive(isVisible);
+        playerNameTextCanvas.gameObject.SetActive(isVisible);
+    }
+
+    private void ShowButtons(bool isVisible)
+    {
+        startButton.gameObject.SetActive(isVisible);
+        restart.gameObject.SetActive(isVisible);
     }
 
     private void Update()
@@ -88,9 +112,9 @@ public class GameManager : MonoBehaviour
         if (score > bestScore)
         {
             bestScore = score;
-            MainManager.Instance.SetBestScore(bestScore);
-            bestScorePlayerName = MainManager.Instance.GetPlayerName();
-            MainManager.Instance.SetBestScorePlayerName(bestScorePlayerName);
+            GameManager.gameManagerInstance.SetBestScore(bestScore);
+            bestScorePlayerName = GameManager.gameManagerInstance.GetPlayerName();
+            GameManager.gameManagerInstance.SetBestScorePlayerName(bestScorePlayerName);
         }
     }
 
@@ -108,7 +132,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayerName()
     {
-        playerNameText.SetText("Player : " + MainManager.Instance.GetPlayerName());
+        playerNameText.SetText("Player : " + GameManager.gameManagerInstance.GetPlayerName());
     }
 
     public bool GetGameStatus(){return isGameActive;}
@@ -122,6 +146,29 @@ public class GameManager : MonoBehaviour
         }
 
     }
-        
+
+    public void SetPlayerName(string pName)
+    {
+        playerName = pName;
+    }
+
+    public string GetPlayerName()
+    {
+        if (playerName == null) { Debug.Log("No name stored."); }
+        return playerName;
+    }
+
+    public void SetBestScore(int bestScore)
+    {
+        this.bestScore = bestScore;
+    }
+
+    public string GetBestScorePlayerName() { return bestScorePlayerName; }
+
+    public void SetBestScorePlayerName(string bestScorePlayerName)
+    {
+        this.bestScorePlayerName = bestScorePlayerName;
+    }
+
 
 }
