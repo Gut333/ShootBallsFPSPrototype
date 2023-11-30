@@ -9,31 +9,37 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManagerInstance;
+    public Camera mainCamera;
     public List<GameObject> blankPoints;
+    public string playerName;
     public bool isGameActive = false;
+
+    public GameObject MenuState;
+
+
     private float randomZ;
     private float randomY;
     private Vector3 blankRandomPos;
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI playerAmmoText;
-    [SerializeField] private TextMeshProUGUI playerNameText;
-    [SerializeField] private TextMeshProUGUI bestScoreText;
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button restart;
-    [SerializeField] private GameObject gameOverText;
-    [SerializeField] private GameObject scoreTextCanvas;
-    [SerializeField] private GameObject ammoTextCanvas;
-    [SerializeField] private GameObject playerNameTextCanvas;
-    [SerializeField] private PlayerController playerScript;
+    [SerializeField] private TextMeshProUGUI m_scoreText;
+    [SerializeField] private TextMeshProUGUI m_playerAmmoText;
+    [SerializeField] private TextMeshProUGUI m_playerNameText;
+    [SerializeField] private TextMeshProUGUI m_bestScoreText;
+    [SerializeField] private Button m_startButton;
+    [SerializeField] private Button m_restart;
+    [SerializeField] private GameObject m_gameOverText;
+    [SerializeField] private GameObject m_scoreTextCanvas;
+    [SerializeField] private GameObject m_ammoTextCanvas;
+    [SerializeField] private GameObject m_playerNameTextCanvas;
+    [SerializeField] private PlayerController m_playerScript;
     private int score = 0;
     private int bestScore;
     private string bestScorePlayerName;
-    public string playerName;
-
-
+    
     private void Awake()
     {
         GameManagerInstance();
+        
+        mainCamera.transform.position = new Vector3(30, 1.35f, 0.2f);
         ShowCanvas(false);
         bestScore = GameManager.gameManagerInstance.GetBestScore();
         bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
@@ -54,23 +60,26 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        mainCamera.transform.position = new Vector3(18, 1.35f, -0.25f);
         ShowCanvas(true);
         ShowButtons(false);
-        isGameActive = true;   
+        isGameActive = true;
+        MenuState.gameObject.SetActive(false);
+        m_gameOverText.gameObject.SetActive(false);
         StartCoroutine(BlankPointsSpawner());
     }
 
    private void ShowCanvas(bool isVisible)
     {
-        scoreTextCanvas.gameObject.SetActive(isVisible);
-        ammoTextCanvas.gameObject.SetActive(isVisible);
-        playerNameTextCanvas.gameObject.SetActive(isVisible);
+        m_scoreTextCanvas.gameObject.SetActive(isVisible);
+        m_ammoTextCanvas.gameObject.SetActive(isVisible);
+       // m_playerNameTextCanvas.gameObject.SetActive(isVisible);
     }
 
     private void ShowButtons(bool isVisible)
     {
-        startButton.gameObject.SetActive(isVisible);
-        restart.gameObject.SetActive(isVisible);
+        m_startButton.gameObject.SetActive(isVisible);
+        m_restart.gameObject.SetActive(isVisible);
     }
 
     private void Update()
@@ -81,15 +90,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        restart.gameObject.SetActive(true);
-        gameOverText.gameObject.SetActive(true);
+        m_restart.gameObject.SetActive(true);
+        m_gameOverText.gameObject.SetActive(true);
         isGameActive = false;
     }
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
-        restart.gameObject.SetActive(true);
+        m_restart.gameObject.SetActive(true);
+        m_gameOverText.gameObject.SetActive(false);
+        mainCamera.transform.position = new Vector3(30, 1.35f, 0.2f);
+        isGameActive = false;
+        MenuState.gameObject.SetActive(true);
+        ShowButtons(true);
+        ShowCanvas(true);
     }
 
     private void BlankPointsGenerator()
@@ -102,7 +116,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore()
     {
         score = score + 33;
-        scoreText.SetText("Score : " + score);
+        m_scoreText.SetText("Score : " + score);
         BestScoreSaver();
         
     }
@@ -120,30 +134,33 @@ public class GameManager : MonoBehaviour
 
     public void BestScoreUpdate()
     {
-        bestScoreText.SetText("best score : " + bestScore + " - " + bestScorePlayerName);
+        m_bestScoreText.SetText("best score : " + bestScore + " - " + bestScorePlayerName);
     }
 
     public int GetBestScore() { return bestScore; }
 
     public void UpdatePlayerAmmo()
     {
-        playerAmmoText.SetText("Ammo : " + playerScript.GetAmmo());
+        m_playerAmmoText.SetText("Ammo : " + m_playerScript.GetAmmo());
     }
 
     public void UpdatePlayerName()
     {
-        playerNameText.SetText("Player : " + GameManager.gameManagerInstance.GetPlayerName());
+        m_playerNameText.SetText("Player : " + GameManager.gameManagerInstance.GetPlayerName());
     }
 
     public bool GetGameStatus(){return isGameActive;}
 
     IEnumerator BlankPointsSpawner()
     {
-        while (isGameActive == true)
+        while (isGameActive)
         {
             yield return new WaitForSeconds(3);
             BlankPointsGenerator();
         }
+
+       
+        
 
     }
 

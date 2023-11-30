@@ -9,14 +9,14 @@ public class Bullet : MonoBehaviour
     private ParticleSystem explosion;
     private ParticleSystem targetExplosion;
     private PlayerController playerScript;
-    
+    //[SerializeField] PlayerController playerScript;
+
 
     private void Awake()
     {
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
         targetExplosion = GameObject.Find("Target Explosion").GetComponent<ParticleSystem>();
-        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-        
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();  
     }
 
     private void FixedUpdate()
@@ -46,6 +46,8 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Target"))
         {
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
+
+           
 
             GameManager.gameManagerInstance.UpdateScore();
 

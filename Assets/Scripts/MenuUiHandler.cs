@@ -11,18 +11,24 @@ using UnityEditor;
 
 public class MenuUiHandler : MonoBehaviour
 {
+    public GameManager gameManagerInstance;
+    public StateSelector stateSelector;
+    public Camera mainCamera;
+
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button exitGameButton;
     [SerializeField] private Text inputText;
     [SerializeField] private Text loadedText;
     private string playerName;
     private string saveName;
-    public GameManager gameManagerInstance;
+    
+
     
 
     public void StartGame()
-    {
-        SceneManager.LoadScene(1);
+    {   
+        gameManagerInstance.StartGame();
+        mainCamera.transform.position = new Vector3(18, 1.35f, -0.25f);
     }
 
     public void ExitGame()
@@ -43,11 +49,6 @@ public class MenuUiHandler : MonoBehaviour
         PlayerPrefs.SetString("name", saveName);
         GameManager.gameManagerInstance.SetBestScorePlayerName(saveName);
     }
-
-
-
-
-
 
 
 }

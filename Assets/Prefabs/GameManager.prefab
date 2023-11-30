@@ -44,17 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdcf8e4ffabe444b897476999417e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   blankPoints:
   - {fileID: 4342681819596018884, guid: 9837554e2fb98154087d2fa4368a21e5, type: 3}
+  playerName: 
   isGameActive: 0
-  scoreText: {fileID: 0}
-  playerAmmoText: {fileID: 0}
-  playerNameText: {fileID: 0}
-  bestScoreText: {fileID: 0}
-  startButton: {fileID: 0}
-  restart: {fileID: 0}
-  gameOverText: {fileID: 0}
-  scoreTextCanvas: {fileID: 0}
-  ammoTextCanvas: {fileID: 0}
-  playerNameTextCanvas: {fileID: 0}
-  playerScript: {fileID: 0}
+  MenuState: {fileID: 0}
+  m_scoreText: {fileID: 0}
+  m_playerAmmoText: {fileID: 0}
+  m_playerNameText: {fileID: 0}
+  m_bestScoreText: {fileID: 0}
+  m_startButton: {fileID: 0}
+  m_restart: {fileID: 0}
+  m_gameOverText: {fileID: 0}
+  m_scoreTextCanvas: {fileID: 0}
+  m_ammoTextCanvas: {fileID: 0}
+  m_playerNameTextCanvas: {fileID: 0}
+  m_playerScript: {fileID: 0}

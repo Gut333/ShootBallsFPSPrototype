@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int playerAmmo { get; set; }
+
     private float verticalInput;
     private float horizontalInput;
     private float rightLimit = 1.6f;
@@ -12,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float gunRecoil = 2.0f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
-    public int playerAmmo;
+    
     private bool hasAmmo;
 
     private void Awake()
@@ -22,12 +24,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gameManagerInstance.GetGameStatus() == true)
+        if (GameManager.gameManagerInstance.GetGameStatus())
         {
             HorizontalMovement();
             VerticalRotation();
             HasAmmo();
             GameManager.gameManagerInstance.UpdatePlayerAmmo();
+        }
+        else
+        {
+            playerAmmo = 10;
         }
     }
 
@@ -60,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Instantiate(bulletPrefab,bulletPoint.transform.position,bulletPoint.transform.rotation);
             playerAmmo = playerAmmo - 1;
