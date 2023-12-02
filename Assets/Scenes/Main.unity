@@ -2838,8 +2838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1399349993}
-  startButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  startButton: {fileID: 1437749823}
+  exitButton: {fileID: 1541117496}
 --- !u!1 &1376810311
 GameObject:
   m_ObjectHideFlags: 0

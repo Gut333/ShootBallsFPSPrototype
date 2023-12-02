@@ -12,11 +12,23 @@ public class MenuState : MonoBehaviour
     public void OnPressedStartButton()
     {
         gameManager.SetGameCameraPos();
+        gameManager.SetGameStatus(true);
+        _ShowButtons(gameManager.GetGameStatus());
     }
 
     public void OnPressedExitButton()
     {
         gameManager.ExitGame();
+    }
+
+    private void _ShowButtons(bool isGameActive)
+    {
+        if (isGameActive)
+        {
+            startButton.gameObject.SetActive(false);
+            exitButton.gameObject.SetActive(false);
+        }
+
     }
 
 }

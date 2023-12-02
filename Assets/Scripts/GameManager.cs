@@ -168,6 +168,11 @@ public class GameManager : MonoBehaviour
 
     public bool GetGameStatus(){return isGameActive;}
 
+    public void SetGameStatus(bool isActive)
+    {
+        isGameActive = isActive;
+    }
+
     IEnumerator BlankPointsSpawner()
     {
         while (isGameActive)
