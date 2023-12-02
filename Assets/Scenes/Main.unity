@@ -3859,6 +3859,8 @@ MonoBehaviour:
   menuState: {fileID: 1367197017}
   restartButton: {fileID: 1441160710}
   gameOverText: {fileID: 1075915503}
+  blankPoints:
+  - {fileID: 4342681819596018884, guid: 9837554e2fb98154087d2fa4368a21e5, type: 3}
 --- !u!1 &1648811350
 GameObject:
   m_ObjectHideFlags: 0

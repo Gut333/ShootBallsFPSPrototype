@@ -9,6 +9,8 @@ public class MenuState : MonoBehaviour
     public Button startButton;
     public Button exitButton;
 
+
+
     public void OnPressedStartButton()
     {
         gameManager.SetGameCameraPos();
@@ -31,5 +33,8 @@ public class MenuState : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+
+
+
 
 }

@@ -10,16 +10,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManagerInstance;
     public Camera mainCamera;
-    public List<GameObject> blankPoints;
     public string playerName;
     public bool isGameActive = false;
 
     public GameObject MenuState;
 
 
-    private float randomZ;
-    private float randomY;
-    private Vector3 blankRandomPos;
     [SerializeField] private TextMeshProUGUI m_scoreText;
     [SerializeField] private TextMeshProUGUI m_playerAmmoText;
     [SerializeField] private TextMeshProUGUI m_playerNameText;
@@ -66,7 +62,6 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         MenuState.gameObject.SetActive(false);
         m_gameOverText.gameObject.SetActive(false);
-        StartCoroutine(BlankPointsSpawner());
     }
 
     public void SetMainMenuCameraPos()
@@ -123,13 +118,6 @@ public class GameManager : MonoBehaviour
         ShowCanvas(true);
     }
 
-    private void BlankPointsGenerator()
-    {
-        randomZ = Random.Range(-2,2);
-        randomY = Random.Range(2,8);
-        blankRandomPos = new Vector3(transform.position.x, randomY, randomZ);
-        Instantiate(blankPoints[0],blankRandomPos,blankPoints[0].transform.rotation);
-    }
     public void UpdateScore()
     {
         score = score + 33;
@@ -173,18 +161,6 @@ public class GameManager : MonoBehaviour
         isGameActive = isActive;
     }
 
-    IEnumerator BlankPointsSpawner()
-    {
-        while (isGameActive)
-        {
-            yield return new WaitForSeconds(3);
-            BlankPointsGenerator();
-        }
-
-       
-        
-
-    }
 
     public void SetPlayerName(string pName)
     {
