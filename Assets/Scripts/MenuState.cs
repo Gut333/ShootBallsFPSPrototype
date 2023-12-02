@@ -13,7 +13,8 @@ public class MenuState : MonoBehaviour
     {
         gameManager.SetGameCameraPos();
         gameManager.SetGameStatus(true);
-        _ShowButtons(gameManager.GetGameStatus());
+        _ShowMenu(gameManager.GetGameStatus());
+        
     }
 
     public void OnPressedExitButton()
@@ -21,14 +22,14 @@ public class MenuState : MonoBehaviour
         gameManager.ExitGame();
     }
 
-    private void _ShowButtons(bool isGameActive)
+    private void _ShowMenu(bool isGameActive)
     {
         if (isGameActive)
         {
-            startButton.gameObject.SetActive(false);
-            exitButton.gameObject.SetActive(false);
+            //startButton.gameObject.SetActive(false);
+            //exitButton.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
         }
-
     }
 
 }
