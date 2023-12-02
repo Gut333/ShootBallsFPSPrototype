@@ -12,7 +12,6 @@ using UnityEditor;
 public class MenuUiHandler : MonoBehaviour
 {
     public GameManager gameManagerInstance;
-    public StateSelector stateSelector;
     public Camera mainCamera;
 
     [SerializeField] private Button startGameButton;
@@ -22,21 +21,6 @@ public class MenuUiHandler : MonoBehaviour
     private string playerName;
     private string saveName;
     
-
-    
-
-    public void StartGame()
-    {   
-        gameManagerInstance.StartGame();
-        mainCamera.transform.position = new Vector3(18, 1.35f, -0.25f);
-    }
-
-    public void ExitGame()
-    {
-        EditorApplication.ExitPlaymode();
-        Application.Quit();
-    }
-
     private void Update()
     {
         playerName = PlayerPrefs.GetString("name", "none");

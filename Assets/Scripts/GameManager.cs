@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        mainCamera.transform.position = new Vector3(18f, -1f, 0f);
+        SetGameCameraPos();
         ShowCanvas(true);
         ShowButtons(false);
         isGameActive = true;
@@ -69,7 +69,24 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BlankPointsSpawner());
     }
 
-   private void ShowCanvas(bool isVisible)
+    public void SetMainMenuCameraPos()
+    {
+        mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
+    }
+
+    public void SetGameCameraPos()
+    {
+        mainCamera.transform.position = new Vector3(18f, -1f, 0f);
+    }
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
+    private void ShowCanvas(bool isVisible)
     {
         m_scoreTextCanvas.gameObject.SetActive(isVisible);
         m_ammoTextCanvas.gameObject.SetActive(isVisible);
@@ -99,7 +116,7 @@ public class GameManager : MonoBehaviour
     {
         m_restart.gameObject.SetActive(true);
         m_gameOverText.gameObject.SetActive(false);
-        mainCamera.transform.position = new Vector3(30, 1.35f, 0.2f);
+        SetMainMenuCameraPos();
         isGameActive = false;
         MenuState.gameObject.SetActive(true);
         ShowButtons(true);
