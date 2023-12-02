@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public string playerName;
     public bool isGameActive = false;
 
-    public GameObject MenuState;
+    public GameObject menuState;
+    public GameObject gameState;
 
 
     [SerializeField] private TextMeshProUGUI m_scoreText;
@@ -34,9 +35,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         GameManagerInstance();
-        
-        mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
-        ShowCanvas(false);
+        SetMainMenuCameraPos();
         bestScore = GameManager.gameManagerInstance.GetBestScore();
         bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
 
@@ -54,24 +53,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void StartGame()
-    {
-        SetGameCameraPos();
-        ShowCanvas(true);
-        ShowButtons(false);
-        isGameActive = true;
-        MenuState.gameObject.SetActive(false);
-        m_gameOverText.gameObject.SetActive(false);
-    }
+ 
 
     public void SetMainMenuCameraPos()
     {
         mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
+
     }
 
     public void SetGameCameraPos()
     {
         mainCamera.transform.position = new Vector3(18f, -1f, 0f);
+        //just for test
+        gameState.SetActive(true);
+
     }
 
 
@@ -81,18 +76,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void ShowCanvas(bool isVisible)
-    {
-        m_scoreTextCanvas.gameObject.SetActive(isVisible);
-        m_ammoTextCanvas.gameObject.SetActive(isVisible);
-       // m_playerNameTextCanvas.gameObject.SetActive(isVisible);
-    }
 
-    private void ShowButtons(bool isVisible)
-    {
-        m_startButton.gameObject.SetActive(isVisible);
-        m_restart.gameObject.SetActive(isVisible);
-    }
+
 
     private void Update()
     {
@@ -107,16 +92,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
     }
 
-    public void Restart()
-    {
-        m_restart.gameObject.SetActive(true);
-        m_gameOverText.gameObject.SetActive(false);
-        SetMainMenuCameraPos();
-        isGameActive = false;
-        MenuState.gameObject.SetActive(true);
-        ShowButtons(true);
-        ShowCanvas(true);
-    }
+
 
     public void UpdateScore()
     {

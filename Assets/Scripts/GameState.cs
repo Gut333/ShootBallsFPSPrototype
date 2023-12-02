@@ -18,7 +18,9 @@ public class GameState : MonoBehaviour
     private float m_RandomX;
     private Vector3 m_blankRandomPos;
 
-    private void Start()
+
+
+    private void OnEnable()
     {
         StartCoroutine(BlankPointsSpawner());
     }

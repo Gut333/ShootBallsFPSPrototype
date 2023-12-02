@@ -2950,11 +2950,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1648811352}
-  blankPoints:
-  - {fileID: 4342681819596018884, guid: 9837554e2fb98154087d2fa4368a21e5, type: 3}
   playerName: 
   isGameActive: 0
-  MenuState: {fileID: 1367197015}
+  menuState: {fileID: 1367197015}
+  gameState: {fileID: 1648589078}
   m_scoreText: {fileID: 2117571585}
   m_playerAmmoText: {fileID: 634208897}
   m_playerNameText: {fileID: 1575557441}
@@ -3819,7 +3818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1648589079
 Transform:
   m_ObjectHideFlags: 0
