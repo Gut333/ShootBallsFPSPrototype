@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 369318554998695268}
   - component: {fileID: 369318554998695271}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Game Manager pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369318554998695269}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfdcf8e4ffabe444b897476999417e19, type: 3}
   m_Name: 

@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         GameManagerInstance();
         
-        mainCamera.transform.position = new Vector3(30, 1.35f, 0.2f);
+        mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
         ShowCanvas(false);
         bestScore = GameManager.gameManagerInstance.GetBestScore();
         bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        mainCamera.transform.position = new Vector3(18, 1.35f, -0.25f);
+        mainCamera.transform.position = new Vector3(18f, -1f, 0f);
         ShowCanvas(true);
         ShowButtons(false);
         isGameActive = true;
