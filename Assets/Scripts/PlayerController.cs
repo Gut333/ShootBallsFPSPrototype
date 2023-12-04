@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.gameManagerInstance.GetGameStatus())
         {
-            HorizontalMovement();
-            VerticalRotation();
+            _MovePlayer();
             HasAmmo();
 
            gameState.UpdatePlayerAmmo(); 
@@ -40,17 +39,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void VerticalRotation()
+    public void UpdateScore()
+    {
+        gameState.UpdateScore();
+    }
+
+
+    private void _MovePlayer()
     {
         m_VerticalInput = Input.GetAxis("Vertical");
         transform.Rotate(0, 0, m_VerticalInput);
-    }
-    private void HorizontalMovement()
-    {
+
         m_HorizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.forward * m_SpeedMovement * m_HorizontalInput * Time.deltaTime);
         ScreenLimiter();
     }
+
 
     public bool HasAmmo()
     {

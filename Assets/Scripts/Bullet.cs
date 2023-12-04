@@ -51,12 +51,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Target"))
         {
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
-
-
-            // replace with some GameState Function
-            //GameManager.gameManagerInstance.UpdateScore();
-            //gameState.UpdateScore();
-            //playerScript.UpdateScore();
+            playerScript.UpdateScore();
 
             explosion.gameObject.transform.position = transform.position;
             targetExplosion.gameObject.transform.position = transform.position;
