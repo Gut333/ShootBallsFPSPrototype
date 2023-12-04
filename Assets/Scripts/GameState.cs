@@ -119,7 +119,7 @@ public class GameState : MonoBehaviour
 
     IEnumerator BlankPointsSpawner()
     {
-        //gameManager.SetGameStatus(true);
+        gameManager.SetGameStatus(true);
         while (gameManager.GetGameStatus())
         {
             yield return new WaitForSeconds(3);
@@ -127,7 +127,7 @@ public class GameState : MonoBehaviour
 
             _BlankPointsGenerator();
         }
-        StopCoroutine("BlankPointsSpawner");
+        //StopCoroutine("BlankPointsSpawner");
         Debug.Log("stop spawner coroutine");
     }
 

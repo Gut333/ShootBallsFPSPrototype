@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //public GameState gameState;
+
     private float bulletSpeed = 40f;
     private float outOfLimit = -1f;
     private ParticleSystem explosion;
@@ -11,12 +13,15 @@ public class Bullet : MonoBehaviour
     private PlayerController playerScript;
     //[SerializeField] PlayerController playerScript;
 
+    
+
 
     private void Awake()
     {
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
         targetExplosion = GameObject.Find("Target Explosion").GetComponent<ParticleSystem>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();  
+        
     }
 
     private void FixedUpdate()
@@ -47,9 +52,11 @@ public class Bullet : MonoBehaviour
         {
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
 
-           
+
             // replace with some GameState Function
             //GameManager.gameManagerInstance.UpdateScore();
+            //gameState.UpdateScore();
+            //playerScript.UpdateScore();
 
             explosion.gameObject.transform.position = transform.position;
             targetExplosion.gameObject.transform.position = transform.position;

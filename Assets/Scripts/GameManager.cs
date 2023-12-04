@@ -13,9 +13,7 @@ public class GameManager : MonoBehaviour
     public string playerName;
     public GameObject menuState;
     public GameObject gameState;
-
     private bool m_IsGameActive;
-
 
     private void Awake()
     {
@@ -36,12 +34,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
- 
 
     public void SetMainMenuCameraPos()
     {
         mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
-
+        SetGameStatus(false);
     }
 
     public void SetGameCameraPos()
@@ -53,12 +50,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     public void ExitGame(){Application.Quit();}
 
     public bool GetGameStatus(){return m_IsGameActive;}
 
     public void SetGameStatus(bool isActive){m_IsGameActive = isActive;}
-
 
 }
