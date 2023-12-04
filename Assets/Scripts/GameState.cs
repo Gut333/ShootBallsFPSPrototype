@@ -35,6 +35,13 @@ public class GameState : MonoBehaviour
         m_scoreText.gameObject.SetActive(true);
         m_bestScoreText.gameObject.SetActive(true);
         m_playerAmmoText.gameObject.SetActive(true);
+
+         m_BestScore = GetBestScore();
+    }
+
+    private void Update()
+    {
+       // gameManager.GetGameStatus();
     }
 
     public void GameOver()
@@ -51,12 +58,13 @@ public class GameState : MonoBehaviour
         restartButton.gameObject.SetActive(false);
         menuState.gameObject.SetActive(true);
         gameOverText.SetActive(false);
+        this.gameObject.SetActive(false);
+        
     }
 
 
     public void UpdatePlayerAmmo()
     {
-        
          m_playerAmmoText.SetText("Ammo : " + player.GetAmmo());
     }
 
@@ -100,10 +108,6 @@ public class GameState : MonoBehaviour
 
     }
 
-
-
-
-
     private void _BlankPointsGenerator()
     {
         m_RandomZ = Random.Range(-2, 2);
@@ -115,12 +119,16 @@ public class GameState : MonoBehaviour
 
     IEnumerator BlankPointsSpawner()
     {
-        gameManager.SetGameStatus(true);
+        //gameManager.SetGameStatus(true);
         while (gameManager.GetGameStatus())
         {
             yield return new WaitForSeconds(3);
+            Debug.Log("spawner coroutine active");
+
             _BlankPointsGenerator();
         }
+        StopCoroutine("BlankPointsSpawner");
+        Debug.Log("stop spawner coroutine");
     }
 
 

@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
 
     public GameState gameState;
 
-    private float verticalInput;
-    private float horizontalInput;
-    private float rightLimit = 1.6f;
-    private float leftLimit = -1.6f;
-    private float speedMovement = 5f;
-    private float gunRecoil = 2.0f;
+    private float m_VerticalInput;
+    private float m_HorizontalInput;
+    private float m_RightLimit = 1.6f;
+    private float m_LeftLimit = -1.6f;
+    private float m_SpeedMovement = 5f;
+    private float m_GunRecoil = 1.0f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
     
@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour
 
     private void VerticalRotation()
     {
-        verticalInput = Input.GetAxis("Vertical");
-        transform.Rotate(0, 0, verticalInput);
+        m_VerticalInput = Input.GetAxis("Vertical");
+        transform.Rotate(0, 0, m_VerticalInput);
     }
     private void HorizontalMovement()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.forward * speedMovement * horizontalInput * Time.deltaTime);
+        m_HorizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.forward * m_SpeedMovement * m_HorizontalInput * Time.deltaTime);
         ScreenLimiter();
     }
 
@@ -83,20 +83,20 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ShootAnim()
     {
-        transform.position = new Vector3(transform.position.x + gunRecoil, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x + m_GunRecoil, transform.position.y, transform.position.z);
         yield return new WaitForSeconds(0.1f);
-        transform.position = new Vector3(transform.position.x - gunRecoil, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x - m_GunRecoil, transform.position.y, transform.position.z);
     }
 
     private void ScreenLimiter()
     {
-        if(transform.position.z > rightLimit)
+        if(transform.position.z > m_RightLimit)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, rightLimit);
+            transform.position = new Vector3(transform.position.x, transform.position.y, m_RightLimit);
         }
-        else if(transform.position.z < leftLimit)
+        else if(transform.position.z < m_LeftLimit)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, leftLimit);
+            transform.position = new Vector3(transform.position.x, transform.position.y, m_LeftLimit);
         }
     }
 

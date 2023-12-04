@@ -11,23 +11,17 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManagerInstance;
     public Camera mainCamera;
     public string playerName;
-    public bool isGameActive = false;
-
     public GameObject menuState;
     public GameObject gameState;
 
+    private bool m_IsGameActive;
 
-    [SerializeField] private TextMeshProUGUI m_playerNameText;
 
-
-    
     private void Awake()
     {
         GameManagerInstance();
         SetMainMenuCameraPos();
-       // bestScore = GameManager.gameManagerInstance.GetBestScore();
-       // bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
-
+        SetGameStatus(false);
     }
 
 
@@ -55,44 +49,16 @@ public class GameManager : MonoBehaviour
         mainCamera.transform.position = new Vector3(18f, -1f, 0f);
         //just for test
         gameState.SetActive(true);
+        SetGameStatus(true);
 
     }
 
 
     public void ExitGame(){Application.Quit();}
 
+    public bool GetGameStatus(){return m_IsGameActive;}
 
-    private void Update()
-    {
-       // UpdatePlayerName();
-       // BestScoreUpdate();
-    }
-
-
-    public void UpdatePlayerName()
-    {
-        m_playerNameText.SetText("Player : " + GameManager.gameManagerInstance.GetPlayerName());
-    }
-
-    public bool GetGameStatus(){return isGameActive;}
-
-    public void SetGameStatus(bool isActive)
-    {
-        isGameActive = isActive;
-    }
-
-
-    public void SetPlayerName(string pName)
-    {
-        playerName = pName;
-    }
-
-    public string GetPlayerName()
-    {
-        if (playerName == null) { Debug.Log("No name stored."); }
-        return playerName;
-    }
-
+    public void SetGameStatus(bool isActive){m_IsGameActive = isActive;}
 
 
 }

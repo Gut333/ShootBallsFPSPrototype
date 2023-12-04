@@ -2952,10 +2952,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1648811352}
   playerName: 
-  isGameActive: 0
   menuState: {fileID: 1367197015}
   gameState: {fileID: 1648589078}
-  m_playerNameText: {fileID: 1575557441}
 --- !u!4 &1399349994
 Transform:
   m_ObjectHideFlags: 0
@@ -3846,7 +3844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1648589079
 Transform:
   m_ObjectHideFlags: 0

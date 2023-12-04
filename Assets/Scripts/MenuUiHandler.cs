@@ -11,9 +11,6 @@ using UnityEditor;
 
 public class MenuUiHandler : MonoBehaviour
 {
-    public GameManager gameManagerInstance;
-    public Camera mainCamera;
-
     [SerializeField] private Text inputText;
     [SerializeField] private Text loadedText;
     private string playerName;
