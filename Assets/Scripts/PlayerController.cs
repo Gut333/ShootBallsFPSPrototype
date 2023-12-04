@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public int playerAmmo { get; set; }
 
+    public GameState gameState;
+
     private float verticalInput;
     private float horizontalInput;
     private float rightLimit = 1.6f;
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GameManager.gameManagerInstance.GameOver();
+            gameState.GameOver();
             return hasAmmo;
         }
     }

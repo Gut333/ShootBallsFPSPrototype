@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a756894746ede49a8ba8c20bab833a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 1648589080}
   bulletPrefab: {fileID: 5758989690858616276, guid: 6230facfd2a3ad947bbeea4a5cb0bcae, type: 3}
   bulletPoint: {fileID: 52544301}
 --- !u!1 &232532886
@@ -2958,9 +2959,6 @@ MonoBehaviour:
   m_playerAmmoText: {fileID: 634208897}
   m_playerNameText: {fileID: 1575557441}
   m_bestScoreText: {fileID: 412260624}
-  m_startButton: {fileID: 1437749823}
-  m_restart: {fileID: 1441160710}
-  m_gameOverText: {fileID: 1075915503}
   m_scoreTextCanvas: {fileID: 2117571583}
   m_ammoTextCanvas: {fileID: 634208895}
   m_playerNameTextCanvas: {fileID: 1575557439}
@@ -3432,7 +3430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501121228}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.63, y: -4.52, z: 3.95}
+  m_LocalPosition: {x: 13.63, y: -4.94, z: 3.95}
   m_LocalScale: {x: 11.05, y: 1.22, z: 0.25000006}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3560,7 +3558,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541117494}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1042.2358}
+  m_LocalPosition: {x: 0, y: 0, z: -545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3570,8 +3568,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00015258786, y: 33.81653}
-  m_SizeDelta: {x: 73.5, y: 30}
+  m_AnchoredPosition: {x: 0, y: 120}
+  m_SizeDelta: {x: 58.2, y: 21.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1541117496
 MonoBehaviour:
@@ -3818,7 +3816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1648589079
 Transform:
   m_ObjectHideFlags: 0
@@ -3856,6 +3854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1399349993}
   menuState: {fileID: 1367197017}
+  player: {fileID: 0}
   restartButton: {fileID: 1441160710}
   gameOverText: {fileID: 1075915503}
   blankPoints:
@@ -4596,8 +4595,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

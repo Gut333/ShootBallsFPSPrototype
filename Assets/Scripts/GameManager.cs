@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_playerAmmoText;
     [SerializeField] private TextMeshProUGUI m_playerNameText;
     [SerializeField] private TextMeshProUGUI m_bestScoreText;
-    [SerializeField] private Button m_startButton;
-    [SerializeField] private Button m_restart;
-    [SerializeField] private GameObject m_gameOverText;
     [SerializeField] private GameObject m_scoreTextCanvas;
     [SerializeField] private GameObject m_ammoTextCanvas;
     [SerializeField] private GameObject m_playerNameTextCanvas;
@@ -70,13 +67,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-
-
+    public void ExitGame(){Application.Quit();}
 
 
     private void Update()
@@ -84,14 +75,6 @@ public class GameManager : MonoBehaviour
         UpdatePlayerName();
         BestScoreUpdate();
     }
-
-    public void GameOver()
-    {
-        m_restart.gameObject.SetActive(true);
-        m_gameOverText.gameObject.SetActive(true);
-        isGameActive = false;
-    }
-
 
 
     public void UpdateScore()

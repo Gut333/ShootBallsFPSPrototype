@@ -7,6 +7,7 @@ public class GameState : MonoBehaviour
 {
     public GameManager gameManager;
     public MenuState menuState;
+    public PlayerController player;
 
     public Button restartButton;
     public GameObject gameOverText;
@@ -20,9 +21,18 @@ public class GameState : MonoBehaviour
 
 
 
+
+
     private void OnEnable()
     {
         StartCoroutine(BlankPointsSpawner());
+    }
+
+    public void GameOver()
+    {
+        restartButton.gameObject.SetActive(true);
+        gameOverText.gameObject.SetActive(true);
+        gameManager.SetGameStatus(false);
     }
 
     public void OnRestartButtonPressed()
