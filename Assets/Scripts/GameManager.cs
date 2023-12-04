@@ -17,24 +17,16 @@ public class GameManager : MonoBehaviour
     public GameObject gameState;
 
 
-    [SerializeField] private TextMeshProUGUI m_scoreText;
-    [SerializeField] private TextMeshProUGUI m_playerAmmoText;
     [SerializeField] private TextMeshProUGUI m_playerNameText;
-    [SerializeField] private TextMeshProUGUI m_bestScoreText;
-    [SerializeField] private GameObject m_scoreTextCanvas;
-    [SerializeField] private GameObject m_ammoTextCanvas;
-    [SerializeField] private GameObject m_playerNameTextCanvas;
-    [SerializeField] private PlayerController m_playerScript;
-    private int score = 0;
-    private int bestScore;
-    private string bestScorePlayerName;
+
+
     
     private void Awake()
     {
         GameManagerInstance();
         SetMainMenuCameraPos();
-        bestScore = GameManager.gameManagerInstance.GetBestScore();
-        bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
+       // bestScore = GameManager.gameManagerInstance.GetBestScore();
+       // bestScorePlayerName = GameManager.gameManagerInstance.GetBestScorePlayerName();
 
     }
 
@@ -72,41 +64,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        UpdatePlayerName();
-        BestScoreUpdate();
+       // UpdatePlayerName();
+       // BestScoreUpdate();
     }
 
-
-    public void UpdateScore()
-    {
-        score = score + 33;
-        m_scoreText.SetText("Score : " + score);
-        BestScoreSaver();
-        
-    }
-
-    public void BestScoreSaver()
-    {
-        if (score > bestScore)
-        {
-            bestScore = score;
-            GameManager.gameManagerInstance.SetBestScore(bestScore);
-            bestScorePlayerName = GameManager.gameManagerInstance.GetPlayerName();
-            GameManager.gameManagerInstance.SetBestScorePlayerName(bestScorePlayerName);
-        }
-    }
-
-    public void BestScoreUpdate()
-    {
-        m_bestScoreText.SetText("best score : " + bestScore + " - " + bestScorePlayerName);
-    }
-
-    public int GetBestScore() { return bestScore; }
-
-    public void UpdatePlayerAmmo()
-    {
-        m_playerAmmoText.SetText("Ammo : " + m_playerScript.GetAmmo());
-    }
 
     public void UpdatePlayerName()
     {
@@ -132,17 +93,6 @@ public class GameManager : MonoBehaviour
         return playerName;
     }
 
-    public void SetBestScore(int bestScore)
-    {
-        this.bestScore = bestScore;
-    }
-
-    public string GetBestScorePlayerName() { return bestScorePlayerName; }
-
-    public void SetBestScorePlayerName(string bestScorePlayerName)
-    {
-        this.bestScorePlayerName = bestScorePlayerName;
-    }
 
 
 }

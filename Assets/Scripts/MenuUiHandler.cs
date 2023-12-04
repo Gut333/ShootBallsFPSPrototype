@@ -14,8 +14,6 @@ public class MenuUiHandler : MonoBehaviour
     public GameManager gameManagerInstance;
     public Camera mainCamera;
 
-    [SerializeField] private Button startGameButton;
-    [SerializeField] private Button exitGameButton;
     [SerializeField] private Text inputText;
     [SerializeField] private Text loadedText;
     private string playerName;
@@ -31,7 +29,7 @@ public class MenuUiHandler : MonoBehaviour
     {
         saveName = inputText.text;
         PlayerPrefs.SetString("name", saveName);
-        GameManager.gameManagerInstance.SetBestScorePlayerName(saveName);
+       // GameManager.gameManagerInstance.SetBestScorePlayerName(saveName);
     }
 
 

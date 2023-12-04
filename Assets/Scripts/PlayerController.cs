@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
             HorizontalMovement();
             VerticalRotation();
             HasAmmo();
-            GameManager.gameManagerInstance.UpdatePlayerAmmo();
+
+           gameState.UpdatePlayerAmmo(); 
         }
         else
         {

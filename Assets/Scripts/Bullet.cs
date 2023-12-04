@@ -48,8 +48,8 @@ public class Bullet : MonoBehaviour
             playerScript.SetAmmo(playerScript.GetAmmo()+1);
 
            
-
-            GameManager.gameManagerInstance.UpdateScore();
+            // replace with some GameState Function
+            //GameManager.gameManagerInstance.UpdateScore();
 
             explosion.gameObject.transform.position = transform.position;
             targetExplosion.gameObject.transform.position = transform.position;
