@@ -34,13 +34,13 @@ public class GameManager : MonoBehaviour
 
     public void SetMainMenuCameraPos()
     {
-        mainCamera.transform.position = new Vector3(28, 1.25f, 0f);
+        mainCamera.transform.position = new Vector3(28,3.5f, 0f);
         SetGameStatus(false);
     }
 
     public void SetGameCameraPos()
     {
-        mainCamera.transform.position = new Vector3(18f, -1f, 0f);
+        mainCamera.transform.position = new Vector3(20f, 1.55f, 0f);
         //just for test
         gameState.SetActive(true);
         SetGameStatus(true);
