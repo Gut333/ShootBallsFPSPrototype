@@ -41,6 +41,7 @@ public class GameState : MonoBehaviour
     {
         GameObject obj = GameObject.Find("Target 2(Clone)");
         Destroy(obj);
+        
     }
 
     private void Update()
@@ -53,6 +54,7 @@ public class GameState : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
         gameManager.SetGameStatus(false);
+
     }
 
     public void OnRestartButtonPressed()
@@ -61,7 +63,7 @@ public class GameState : MonoBehaviour
         gameManager.SetGameStatus(true);
         gameManager.SetMainMenuCameraPos();
         restartButton.gameObject.SetActive(false);
-        menuState.gameObject.SetActive(true);
+       // menuState.gameObject.SetActive(true);
         gameOverText.SetActive(false);
         this.gameObject.SetActive(false);
         

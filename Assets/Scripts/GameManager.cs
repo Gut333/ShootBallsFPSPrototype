@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+       
         GameManagerInstance();
         SetMainMenuCameraPos();
         SetGameStatus(false);
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     public void SetMainMenuCameraPos()
     {
         mainCamera.transform.position = new Vector3(28,3.5f, 0f);
+        menuState.gameObject.SetActive(true);
         SetGameStatus(false);
     }
 
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
         mainCamera.transform.position = new Vector3(20f, 1.55f, 0f);
         //just for test
         gameState.SetActive(true);
+        menuState.SetActive(false);
         SetGameStatus(true);
 
     }

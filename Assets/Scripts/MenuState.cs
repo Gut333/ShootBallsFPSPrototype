@@ -9,14 +9,19 @@ public class MenuState : MonoBehaviour
     public Button startButton;
     public Button exitButton;
 
-
+    private void OnEnable()
+    {
+        startButton.gameObject.SetActive(true);
+        exitButton.gameObject.SetActive(true);
+    }
 
     public void OnPressedStartButton()
     {
         gameManager.SetGameCameraPos();
         gameManager.SetGameStatus(true);
-        _ShowMenu(gameManager.GetGameStatus());
-        
+
+        startButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(false);
     }
 
     public void OnPressedExitButton()
@@ -28,9 +33,9 @@ public class MenuState : MonoBehaviour
     {
         if (isGameActive)
         {
-            //startButton.gameObject.SetActive(false);
-            //exitButton.gameObject.SetActive(false);
-            this.gameObject.SetActive(false);
+            startButton.gameObject.SetActive(false);
+            exitButton.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
         }
     }
 
