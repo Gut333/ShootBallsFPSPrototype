@@ -1,27 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    //public GameState gameState;
-
     private float bulletSpeed = 40f;
     private float outOfLimit = -1f;
     private ParticleSystem explosion;
     private ParticleSystem targetExplosion;
     private PlayerController playerScript;
-    //[SerializeField] PlayerController playerScript;
-
-    
-
 
     private void Awake()
     {
         explosion = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
         targetExplosion = GameObject.Find("Target Explosion").GetComponent<ParticleSystem>();
-        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();  
-        
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();      
     }
 
     private void FixedUpdate()

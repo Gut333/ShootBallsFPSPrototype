@@ -33,19 +33,24 @@ public class GameState : MonoBehaviour
     {
         StartCoroutine(BlankPointsSpawner());
         m_scoreText.gameObject.SetActive(true);
-        m_bestScoreText.gameObject.SetActive(true);
+       // m_bestScoreText.gameObject.SetActive(true);
         m_playerAmmoText.gameObject.SetActive(true);
+    }
 
-         m_BestScore = GetBestScore();
+    private void OnDisable()
+    {
+        GameObject obj = GameObject.Find("Target 2(Clone)");
+        Destroy(obj);
     }
 
     private void Update()
     {
-       // gameManager.GetGameStatus();
+        player.OnInit();
     }
 
     public void GameOver()
     {
+
         restartButton.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
         gameManager.SetGameStatus(false);
@@ -53,6 +58,7 @@ public class GameState : MonoBehaviour
 
     public void OnRestartButtonPressed()
     {
+        m_Score = 0;
         gameManager.SetGameStatus(true);
         gameManager.SetMainMenuCameraPos();
         restartButton.gameObject.SetActive(false);
@@ -61,7 +67,6 @@ public class GameState : MonoBehaviour
         this.gameObject.SetActive(false);
         
     }
-
 
     public void UpdatePlayerAmmo()
     {
@@ -74,7 +79,6 @@ public class GameState : MonoBehaviour
         m_Score = m_Score + 33;
         m_scoreText.SetText("Score : " + m_Score);
         BestScoreSaver();
-
     }
 
     public void BestScoreSaver()
@@ -82,7 +86,7 @@ public class GameState : MonoBehaviour
         if (m_Score > m_BestScore)
         {
             m_BestScore = m_Score;
-            //GameManager.gameManagerInstance.SetBestScore(m_BestScore);
+            SetBestScore(m_BestScore);
             //bestScorePlayerName = GameManager.gameManagerInstance.GetPlayerName();
             //GameManager.gameManagerInstance.SetBestScorePlayerName(bestScorePlayerName);
         }
@@ -95,12 +99,13 @@ public class GameState : MonoBehaviour
 
     public void BestScoreUpdate()
     {
-        m_bestScoreText.SetText("best score : " + m_BestScore + " - " + bestScorePlayerName);
+        m_bestScoreText.SetText("best score : " + m_BestScore);
+        //m_bestScoreText.SetText("best score : " + m_BestScore + " - " + bestScorePlayerName);
     }
 
     public int GetBestScore() { return m_BestScore; }
 
-        public string GetBestScorePlayerName() { return bestScorePlayerName; }
+    public string GetBestScorePlayerName() { return bestScorePlayerName; }
 
     public void SetBestScorePlayerName(string bestScorePlayerName)
     {
@@ -115,6 +120,7 @@ public class GameState : MonoBehaviour
         m_RandomX = Random.Range(1, 8);
         m_blankRandomPos = new Vector3(m_RandomX, m_RandomY, m_RandomZ);
         Instantiate(blankPoints[0], m_blankRandomPos, blankPoints[0].transform.rotation);
+
     }
 
     IEnumerator BlankPointsSpawner()
@@ -123,12 +129,11 @@ public class GameState : MonoBehaviour
         while (gameManager.GetGameStatus())
         {
             yield return new WaitForSeconds(3);
-            Debug.Log("spawner coroutine active");
-
+           // Debug.Log("spawner coroutine active");
             _BlankPointsGenerator();
         }
-        //StopCoroutine("BlankPointsSpawner");
-        Debug.Log("stop spawner coroutine");
+        StopCoroutine("BlankPointsSpawner");
+        //Debug.Log("stop spawner coroutine");
     }
 
 

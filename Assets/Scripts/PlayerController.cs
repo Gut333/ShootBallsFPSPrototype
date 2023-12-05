@@ -5,15 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerAmmo { get; set; }
-
     public GameState gameState;
-
     private float m_VerticalInput;
     private float m_HorizontalInput;
     private float m_RightLimit = 1.6f;
     private float m_LeftLimit = -1.6f;
     private float m_SpeedMovement = 5f;
-    private float m_GunRecoil = 1.0f;
+    private float m_GunRecoil = 0.5f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject bulletPoint;
     
@@ -24,14 +22,13 @@ public class PlayerController : MonoBehaviour
         playerAmmo = 10;
     }
 
-    private void Update()
+    public void OnInit()
     {
         if (GameManager.gameManagerInstance.GetGameStatus())
         {
             _MovePlayer();
             HasAmmo();
-
-           gameState.UpdatePlayerAmmo(); 
+            gameState.UpdatePlayerAmmo();
         }
         else
         {
@@ -49,10 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         m_VerticalInput = Input.GetAxis("Vertical");
         transform.Rotate(0, 0, m_VerticalInput);
+        //rotation limiter ?
 
         m_HorizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.forward * m_SpeedMovement * m_HorizontalInput * Time.deltaTime);
-        ScreenLimiter();
+        _ScreenLimiter();
+
     }
 
 
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAmmo > 0)
         {
-            Shoot();GetAmmo();
+            _Shoot();GetAmmo();
             return hasAmmo;
         }
         else
@@ -71,7 +70,7 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    private void Shoot()
+    private void _Shoot()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(transform.position.x - m_GunRecoil, transform.position.y, transform.position.z);
     }
 
-    private void ScreenLimiter()
+    private void _ScreenLimiter()
     {
         if(transform.position.z > m_RightLimit)
         {
@@ -103,5 +102,4 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, m_LeftLimit);
         }
     }
-
 }
