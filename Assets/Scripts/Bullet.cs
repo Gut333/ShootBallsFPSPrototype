@@ -23,21 +23,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Surface"))
         {
             explosion.gameObject.transform.position = transform.position;
             explosion.Play();
             Destroy(gameObject);
 
         }
-
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            Destroy(gameObject);
-            explosion.gameObject.transform.position = transform.position;
-            explosion.Play();
-        }
-
 
         if (other.gameObject.CompareTag("Target"))
         {

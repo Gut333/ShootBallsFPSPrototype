@@ -9,6 +9,7 @@ TagManager:
   - Box
   - Target
   - Wall
+  - Surface
   layers:
   - Default
   - TransparentFX

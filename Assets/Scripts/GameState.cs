@@ -6,27 +6,27 @@ using TMPro;
 
 public class GameState : MonoBehaviour
 {
+    [Header("General")]
     public GameManager gameManager;
     public MenuState menuState;
     public PlayerController player;
-
     public Button restartButton;
-    public GameObject gameOverText;
 
+    [Header("Blank Point Spawner")]
     public List<GameObject> blankPoints;
 
+    [Header("Text On Screen")]
     [SerializeField] private TextMeshProUGUI m_scoreText;
     [SerializeField] private TextMeshProUGUI m_bestScoreText;
     [SerializeField] private TextMeshProUGUI m_playerAmmoText;
+    [SerializeField] private GameObject gameOverText;
 
     private int m_Score;
     private int m_BestScore;
-
     private float m_RandomZ;
     private float m_RandomY;
     private float m_RandomX;
     private Vector3 m_blankRandomPos;
-
     private string bestScorePlayerName;
 
     private void OnEnable()
@@ -50,7 +50,6 @@ public class GameState : MonoBehaviour
 
     public void GameOver()
     {
-
         restartButton.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
         gameManager.SetGameStatus(false);
@@ -87,8 +86,6 @@ public class GameState : MonoBehaviour
         {
             m_BestScore = m_Score;
             SetBestScore(m_BestScore);
-            //bestScorePlayerName = GameManager.gameManagerInstance.GetPlayerName();
-            //GameManager.gameManagerInstance.SetBestScorePlayerName(bestScorePlayerName);
         }
     }
 
@@ -100,7 +97,6 @@ public class GameState : MonoBehaviour
     public void BestScoreUpdate()
     {
         m_bestScoreText.SetText("best score : " + m_BestScore);
-        //m_bestScoreText.SetText("best score : " + m_BestScore + " - " + bestScorePlayerName);
     }
 
     public int GetBestScore() { return m_BestScore; }
@@ -110,17 +106,15 @@ public class GameState : MonoBehaviour
     public void SetBestScorePlayerName(string bestScorePlayerName)
     {
         this.bestScorePlayerName = bestScorePlayerName;
-
     }
 
     private void _BlankPointsGenerator()
     {
         m_RandomZ = Random.Range(-2, 2);
-        m_RandomY = Random.Range(0, 5);
+        m_RandomY = Random.Range(1, 5);
         m_RandomX = Random.Range(1, 8);
         m_blankRandomPos = new Vector3(m_RandomX, m_RandomY, m_RandomZ);
         Instantiate(blankPoints[0], m_blankRandomPos, blankPoints[0].transform.rotation);
-
     }
 
     IEnumerator BlankPointsSpawner()
@@ -129,12 +123,8 @@ public class GameState : MonoBehaviour
         while (gameManager.GetGameStatus())
         {
             yield return new WaitForSeconds(3);
-           // Debug.Log("spawner coroutine active");
             _BlankPointsGenerator();
         }
         StopCoroutine("BlankPointsSpawner");
-        //Debug.Log("stop spawner coroutine");
     }
-
-
 }
